@@ -30,7 +30,23 @@ export const userSchema = z.object({
   submitted: z.array(z.number())
 });
 
+export const jobSchema = z.object({
+  id: z.number(),
+  by: z.string(),
+  score: z.number(),
+  time: z.number(),
+  title: z.string(),
+  type: z.literal('job'),
+  url: z.string()
+});
+
+export const postSchema = z.discriminatedUnion('type', [
+  storySchema,
+  jobSchema
+]);
+
 export const itemSchema = z.discriminatedUnion('type', [
   storySchema,
-  commentSchema
+  commentSchema,
+  jobSchema
 ]);
