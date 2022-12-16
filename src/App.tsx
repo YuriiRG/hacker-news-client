@@ -1,24 +1,29 @@
+import { lazy, Suspense } from 'react';
 import { Link, Route, Switch } from 'wouter';
+
+const Root = lazy(() => import('./routes/Root'));
+const Page1 = lazy(() => import('./routes/Page1'));
+
 export default function App() {
   return (
-    <div>
-      <Link href='/'>Index</Link>
-      <Link href='/page1'>Page1</Link>
-      <Link href='/page2'>Page2</Link>
-      <Switch>
-        <Route path='/'>
-          <div>Index data</div>
-        </Route>
-        <Route path='/page1'>
-          <div>Page1 data</div>
-        </Route>
-        <Route path='/page2'>
-          <div>Page2 data</div>
-        </Route>
-        <Route>
-          <div>Not found</div>
-        </Route>
-      </Switch>
+    <div className='flex flex-col min-h-screen'>
+      <div className='flex-grow-0'>
+        Navbar. <Link href='/page1'>page1</Link>.{' '}
+        <Link href='/'>Main page</Link>
+      </div>
+      <Suspense fallback={<>Loading...</>}>
+        <div className='flex-grow'>
+          <Switch>
+            <Route path='/'>
+              <Root />
+            </Route>
+            <Route path='/page1'>
+              <Page1 />
+            </Route>
+            <Route>Not found</Route>
+          </Switch>
+        </div>
+      </Suspense>
     </div>
   );
 }
