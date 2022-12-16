@@ -1,3 +1,3 @@
 export default function Root() {
-  return <>Index page</>;
+  return <div className='p-3'>Index</div>;
 }
