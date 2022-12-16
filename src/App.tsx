@@ -1,28 +1,28 @@
 import { lazy, Suspense } from 'react';
-import { Link, Route, Switch } from 'wouter';
+import { Route, Switch } from 'wouter';
+import NavBar from './components/NavBar';
+import Loader from './routes/Loader';
 
 const Root = lazy(() => import('./routes/Root'));
 const Page1 = lazy(() => import('./routes/Page1'));
+const NotFound = lazy(() => import('./routes/NotFound'));
 
 export default function App() {
   return (
     <div className='flex flex-col min-h-screen'>
-      <div className='flex-grow-0'>
-        Navbar. <Link href='/page1'>page1</Link>.{' '}
-        <Link href='/'>Main page</Link>
-      </div>
-      <Suspense fallback={<>Loading...</>}>
-        <div className='flex-grow'>
-          <Switch>
-            <Route path='/'>
-              <Root />
-            </Route>
-            <Route path='/page1'>
-              <Page1 />
-            </Route>
-            <Route>Not found</Route>
-          </Switch>
-        </div>
+      <NavBar />
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route path='/'>
+            <Root />
+          </Route>
+          <Route path='/page1'>
+            <Page1 />
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
       </Suspense>
     </div>
   );
