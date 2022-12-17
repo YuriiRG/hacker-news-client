@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import fetcher from '../helpers/fetcher';
 import { postSchema } from '../schemas';
+import PostSummarySkeleton from './PostSummarySkeleton';
 
 export default function PostSummary({ id }: { id: number }) {
   const { data, isLoading, isError } = useQuery({
@@ -10,19 +11,14 @@ export default function PostSummary({ id }: { id: number }) {
         `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
         postSchema
       ),
-    keepPreviousData: true
+    keepPreviousData: true,
+    staleTime: 1500
   });
   if (isError) {
     return <>Error.</>;
   }
   if (isLoading) {
-    return (
-      <div className='flex gap-1 p-1'>
-        <div className='w-10 h-6 bg-gray-600 rounded-lg'></div>
-        <div className='w-10 h-6 bg-gray-600 rounded-lg'></div>
-        <div className='w-96 h-6 bg-gray-600 rounded-lg'></div>
-      </div>
-    );
+    return <PostSummarySkeleton />;
   }
 
   return (
