@@ -7,11 +7,7 @@ import PostSummarySkeleton from '../components/PostSummarySkeleton';
 export default function Root() {
   const postCount = 30;
 
-  const {
-    data: ids,
-    isLoading,
-    isError
-  } = useQuery({
+  const { data: ids, isError } = useQuery({
     queryKey: ['topstories'],
     queryFn: () =>
       fetcher(
