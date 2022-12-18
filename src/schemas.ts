@@ -4,7 +4,7 @@ export const storySchema = z.object({
   id: z.number(),
   by: z.string(),
   descendants: z.number(),
-  kids: z.array(z.number()),
+  kids: z.array(z.number()).optional(),
   score: z.number(),
   time: z.number(),
   title: z.string(),
@@ -44,15 +44,24 @@ export const jobSchema = z.object({
 });
 export type Job = z.infer<typeof jobSchema>;
 
-export const postSchema = z.discriminatedUnion('type', [
-  storySchema,
-  jobSchema
-]);
-export type Post = z.infer<typeof postSchema>;
+export const askSchema = z.object({
+  id: z.number(),
+  by: z.string(),
+  descendants: z.number(),
+  kids: z.array(z.number()).optional(),
+  score: z.number(),
+  time: z.number(),
+  title: z.string(),
+  type: z.literal('story'),
+  text: z.string()
+});
+export type Ask = z.infer<typeof askSchema>;
 
-export const itemSchema = z.discriminatedUnion('type', [
+export const itemSchema = z.union([
   storySchema,
   commentSchema,
-  jobSchema
+  jobSchema,
+  askSchema
 ]);
+
 export type Item = z.infer<typeof itemSchema>;
