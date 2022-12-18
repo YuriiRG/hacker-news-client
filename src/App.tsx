@@ -5,7 +5,7 @@ import Loader from './routes/Loader';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-const Root = lazy(() => import('./routes/Root'));
+const Feed = lazy(() => import('./components/Feed'));
 const NotFound = lazy(() => import('./routes/NotFound'));
 
 const queryClient = new QueryClient();
@@ -18,7 +18,13 @@ export default function App() {
         <Suspense fallback={<Loader />}>
           <Switch>
             <Route path='/'>
-              <Root />
+              <Feed type='top' />
+            </Route>
+            <Route path='/best'>
+              <Feed type='best' />
+            </Route>
+            <Route path='/new'>
+              <Feed type='new' />
             </Route>
             <Route>
               <NotFound />

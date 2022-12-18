@@ -4,14 +4,14 @@ import { z } from 'zod';
 import PostSummary from '../components/PostSummary';
 import { Post, postSchema } from '../schemas';
 import PostSummarySkeleton from '../components/PostSummarySkeleton';
-export default function Root() {
+export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
   const postCount = 30;
 
   const { data: ids, isError } = useQuery({
-    queryKey: ['topstories'],
+    queryKey: [`${type}stories`],
     queryFn: () =>
       fetcher(
-        'https://hacker-news.firebaseio.com/v0/topstories.json',
+        `https://hacker-news.firebaseio.com/v0/${type}stories.json`,
         z.array(z.number())
       ),
     select: (arr) => arr.slice(0, postCount)
