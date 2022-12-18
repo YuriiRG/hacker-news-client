@@ -1,9 +1,8 @@
 export default function PostSummarySkeleton() {
   return (
-    <div className='flex gap-1 p-1'>
-      <div className='w-10 h-6 bg-gray-600 rounded-lg animate-pulse'></div>
-      <div className='w-10 h-6 bg-gray-600 rounded-lg animate-pulse'></div>
-      <div className='w-128 h-6 bg-gray-600 rounded-lg animate-pulse'></div>
+    <div className='animate-pulse h-11'>
+      <div className='bg-gray-700 my-px h-5 w-prose rounded-lg'></div>
+      <div className='bg-gray-800 h-5 w-96 rounded-lg'></div>
     </div>
   );
 }

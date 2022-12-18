@@ -1,7 +1,6 @@
 import { useQueries, useQuery } from '@tanstack/react-query';
 import fetcher from '../helpers/fetcher';
 import { z } from 'zod';
-import Loader from './Loader';
 import PostSummary from '../components/PostSummary';
 import { Post, postSchema } from '../schemas';
 import PostSummarySkeleton from '../components/PostSummarySkeleton';
@@ -37,7 +36,7 @@ export default function Root() {
         : []
   });
 
-  if (postResponses.some((post) => post.isError)) {
+  if (postResponses.some((post) => post.isError) || isError) {
     return <div className='p-3'>Error.</div>;
   }
 
@@ -46,20 +45,24 @@ export default function Root() {
     postResponses.length === 0
   ) {
     return (
-      <div className='p-3'>
-        {[...Array(postCount)].map((_, i) => (
-          <PostSummarySkeleton key={i} />
-        ))}
+      <div className='m-2 flex flex-col items-center'>
+        <div className='flex flex-col gap-2 max-w-prose break-words'>
+          {[...Array(postCount)].map((_, i) => (
+            <PostSummarySkeleton key={i} />
+          ))}
+        </div>
       </div>
     );
   }
 
   const posts = postResponses.map((res) => res.data as Post);
   return (
-    <div className='p-3'>
-      {posts.map((post) => (
-        <PostSummary key={post.id} id={post.id} />
-      ))}
+    <div className='m-2 flex flex-col items-center'>
+      <div className='flex flex-col gap-2 max-w-prose break-words'>
+        {posts.map((post) => (
+          <PostSummary key={post.id} id={post.id} />
+        ))}
+      </div>
     </div>
   );
 }
