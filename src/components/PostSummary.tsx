@@ -3,9 +3,9 @@ import fetcher from '../helpers/fetcher';
 import {
   Ask,
   askSchema,
-  itemSchema,
   Job,
   jobSchema,
+  postSchema,
   Story,
   storySchema
 } from '../schemas';
@@ -15,11 +15,12 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { Link } from 'wouter';
 import getItemSchema from '../helpers/getItemSchema';
+import FeedLink from './FeedLink';
 dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
 export default function PostSummary({ id }: { id: number }) {
   const {
-    data: item,
+    data: post,
     isLoading,
     isError
   } = useQuery({
@@ -27,7 +28,7 @@ export default function PostSummary({ id }: { id: number }) {
     queryFn: () =>
       fetcher(
         `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
-        itemSchema
+        postSchema
       ),
     keepPreviousData: true,
     staleTime: 1500
@@ -41,33 +42,26 @@ export default function PostSummary({ id }: { id: number }) {
 
   const sharedCaption = (
     <>
-      by{' '}
-      <Link href={`/user/${item.by}`} className='hover:underline'>
-        {item.by}
+      {post.score} points by{' '}
+      <Link href={`/user/${post.by}`} className='hover:underline'>
+        {post.by}
       </Link>{' '}
       <span
-        title={dayjs(item.time * 1000).format('LLLL')}
+        title={dayjs(post.time * 1000).format('LLLL')}
         className='text-gray-500'
       >
-        {dayjs(item.time * 1000).fromNow()}
+        {dayjs(post.time * 1000).fromNow()}
       </span>{' '}
     </>
   );
-  switch (getItemSchema(item)) {
+  switch (getItemSchema(post)) {
     case storySchema: {
-      const story = item as Story;
+      const story = post as Story;
       return (
         <div>
-          <a
-            href={story.url}
-            target='_blank'
-            rel='noreferrer'
-            className='hover:underline visited:text-gray-500'
-          >
-            {story.title}
-          </a>
+          <FeedLink href={story.url}>{story.title}</FeedLink>
           <div className='text-sm text-gray-500'>
-            {story.score} points {sharedCaption}|{' '}
+            {sharedCaption}|{' '}
             <Link href={`/item/${story.id}`} className='hover:underline'>
               {story.descendants} comments
             </Link>
@@ -76,37 +70,21 @@ export default function PostSummary({ id }: { id: number }) {
       );
     }
     case jobSchema: {
-      const job = item as Job;
+      const job = post as Job;
       return (
         <div>
-          <a
-            href={job.url}
-            target='_blank'
-            rel='noreferrer'
-            className='hover:underline visited:text-gray-500'
-          >
-            {job.title}
-          </a>
-          <div className='text-sm text-gray-500'>
-            {job.score} points {sharedCaption}
-          </div>
+          <FeedLink href={job.url}>{job.title}</FeedLink>
+          <div className='text-sm text-gray-500'>{sharedCaption}</div>
         </div>
       );
     }
     case askSchema: {
-      const ask = item as Ask;
+      const ask = post as Ask;
       return (
         <div>
-          <a
-            href={`/item/${ask.id}`}
-            target='_blank'
-            rel='noreferrer'
-            className='hover:underline visited:text-gray-500'
-          >
-            {ask.title}
-          </a>
+          <FeedLink href={`/item/${ask.id}`}>{ask.title}</FeedLink>
           <div className='text-sm text-gray-500'>
-            {ask.score} points {sharedCaption} |{' '}
+            {sharedCaption} |{' '}
             <Link href={`/item/${ask.id}`} className='hover:underline'>
               {ask.descendants} comments
             </Link>
@@ -115,7 +93,7 @@ export default function PostSummary({ id }: { id: number }) {
       );
     }
     default:
-      console.log(item);
-      return <div>Error: Unknown item type</div>;
+      console.log(post);
+      return <div>Error: Unknown post type</div>;
   }
 }

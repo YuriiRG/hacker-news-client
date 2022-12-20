@@ -57,11 +57,8 @@ export const askSchema = z.object({
 });
 export type Ask = z.infer<typeof askSchema>;
 
-export const itemSchema = z.union([
-  storySchema,
-  commentSchema,
-  jobSchema,
-  askSchema
-]);
+export const postSchema = z.union([storySchema, jobSchema, askSchema]);
+export type Post = z.infer<typeof postSchema>;
 
+export const itemSchema = z.union([postSchema, commentSchema]);
 export type Item = z.infer<typeof itemSchema>;

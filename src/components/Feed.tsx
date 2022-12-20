@@ -3,7 +3,7 @@ import fetcher from '../helpers/fetcher';
 import { z } from 'zod';
 import PostSummary from '../components/PostSummary';
 import PostSummarySkeleton from '../components/PostSummarySkeleton';
-import { Item, itemSchema } from '../schemas';
+import { Post, postSchema } from '../schemas';
 export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
   const postCount = 30;
 
@@ -24,7 +24,7 @@ export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
             queryFn: () =>
               fetcher(
                 `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
-                itemSchema
+                postSchema
               ),
             keepPreviousData: true,
             staleTime: 1500
@@ -51,7 +51,7 @@ export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
     );
   }
 
-  const posts = postResponses.map((res) => res.data as Item);
+  const posts = postResponses.map((res) => res.data as Post);
   return (
     <div className='m-2 flex flex-col items-center'>
       <div className='flex flex-col gap-2 max-w-prose break-words'>
