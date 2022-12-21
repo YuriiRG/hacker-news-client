@@ -11,7 +11,7 @@ export default function FeedLink({ children, href }: FeedLinkProps) {
       href={href}
       target='_blank'
       rel='noreferrer'
-      className='hover:underline visited:text-gray-500'
+      className='hover:underline visited:text-gray-400'
     >
       {children}
     </a>
