@@ -15,10 +15,10 @@ export default function User({ id }: { id: string }) {
   });
   if (isLoading) {
     return (
-      <div className='px-2 sm:px-20'>
-        <h1 className='h-9 w-32 my-px bg-gray-500 rounded-lg'></h1>
-        <p className='h-6 w-20 my-px bg-gray-600 rounded-lg'></p>
-        <p className='h-6 w-60 my-px bg-gray-600 rounded-lg'></p>
+      <div className='px-2 sm:px-20 animate-pulse'>
+        <h1 className='my-2 h-5 w-32 bg-gray-500 rounded-xl'></h1>
+        <p className='my-2 h-4 w-20 bg-gray-600 rounded-lg'></p>
+        <p className='my-2 h-4 w-60 bg-gray-600 rounded-lg'></p>
       </div>
     );
   }

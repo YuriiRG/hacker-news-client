@@ -43,10 +43,7 @@ export default function PostSummary({ id }: { id: number }) {
       <Link href={`/user/${post.by}`} className='hover:underline'>
         {post.by}
       </Link>{' '}
-      <span
-        title={dayjs(post.time * 1000).format('LLLL')}
-        className='text-gray-400'
-      >
+      <span title={dayjs(post.time * 1000).format('LLLL')}>
         {dayjs(post.time * 1000).fromNow()}
       </span>{' '}
     </>
