@@ -53,7 +53,7 @@ export const askSchema = z.object({
   time: z.number(),
   title: z.string(),
   type: z.literal('story'),
-  text: z.string()
+  text: z.string().optional()
 });
 export type Ask = z.infer<typeof askSchema>;
 

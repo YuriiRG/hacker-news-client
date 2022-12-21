@@ -6,7 +6,7 @@ import DOMPurify from 'dompurify';
 
 export default function User({ id }: { id: string }) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['item', id],
+    queryKey: ['user', id],
     queryFn: () =>
       fetcher(
         `https://hacker-news.firebaseio.com/v0/user/${id}.json`,
@@ -14,7 +14,13 @@ export default function User({ id }: { id: string }) {
       )
   });
   if (isLoading) {
-    return <div>Loading user skeleton</div>;
+    return (
+      <div className='px-2 sm:px-20'>
+        <h1 className='h-9 w-32 my-px bg-gray-500 rounded-lg'></h1>
+        <p className='h-6 w-20 my-px bg-gray-600 rounded-lg'></p>
+        <p className='h-6 w-60 my-px bg-gray-600 rounded-lg'></p>
+      </div>
+    );
   }
   if (isError) {
     return <div>Error while loading user data</div>;
