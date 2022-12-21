@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply text-gray-400 bg-gray-900;
+#root {
+  @apply text-gray-300 bg-gray-800;
 }

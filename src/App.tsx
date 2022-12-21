@@ -1,13 +1,12 @@
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Route, Switch } from 'wouter';
 import NavBar from './components/NavBar';
 import Loader from './routes/Loader';
+import Feed from './components/Feed';
+import NotFound from './routes/NotFound';
+import User from './routes/User';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
-const Feed = lazy(() => import('./components/Feed'));
-const NotFound = lazy(() => import('./routes/NotFound'));
-
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -25,6 +24,9 @@ export default function App() {
             </Route>
             <Route path='/new'>
               <Feed type='new' />
+            </Route>
+            <Route path='/user/:id'>
+              {(params) => <User id={params.id} />}
             </Route>
             <Route>
               <NotFound />

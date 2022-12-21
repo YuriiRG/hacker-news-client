@@ -10,14 +10,11 @@ import {
   storySchema
 } from '../schemas';
 import PostSummarySkeleton from './PostSummarySkeleton';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { Link } from 'wouter';
 import getItemSchema from '../helpers/getItemSchema';
 import FeedLink from './FeedLink';
-dayjs.extend(relativeTime);
-dayjs.extend(localizedFormat);
+import dayjs from '../lib/dayjs';
+
 export default function PostSummary({ id }: { id: number }) {
   const {
     data: post,
@@ -46,10 +43,7 @@ export default function PostSummary({ id }: { id: number }) {
       <Link href={`/user/${post.by}`} className='hover:underline'>
         {post.by}
       </Link>{' '}
-      <span
-        title={dayjs(post.time * 1000).format('LLLL')}
-        className='text-gray-500'
-      >
+      <span title={dayjs(post.time * 1000).format('LLLL')}>
         {dayjs(post.time * 1000).fromNow()}
       </span>{' '}
     </>
@@ -60,7 +54,7 @@ export default function PostSummary({ id }: { id: number }) {
       return (
         <div>
           <FeedLink href={story.url}>{story.title}</FeedLink>
-          <div className='text-sm text-gray-500'>
+          <div className='text-sm text-gray-400'>
             {sharedCaption}|{' '}
             <Link href={`/item/${story.id}`} className='hover:underline'>
               {story.descendants} comments
@@ -74,7 +68,7 @@ export default function PostSummary({ id }: { id: number }) {
       return (
         <div>
           <FeedLink href={job.url}>{job.title}</FeedLink>
-          <div className='text-sm text-gray-500'>{sharedCaption}</div>
+          <div className='text-sm text-gray-400'>{sharedCaption}</div>
         </div>
       );
     }
@@ -83,7 +77,7 @@ export default function PostSummary({ id }: { id: number }) {
       return (
         <div>
           <FeedLink href={`/item/${ask.id}`}>{ask.title}</FeedLink>
-          <div className='text-sm text-gray-500'>
+          <div className='text-sm text-gray-400'>
             {sharedCaption} |{' '}
             <Link href={`/item/${ask.id}`} className='hover:underline'>
               {ask.descendants} comments
