@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from '../lib/dayjs';
 import fetcher from '../helpers/fetcher';
 import { userSchema } from '../schemas';
+import DOMPurify from 'dompurify';
 
 export default function User({ id }: { id: string }) {
   const { data, isLoading, isError } = useQuery({
@@ -29,7 +30,9 @@ export default function User({ id }: { id: string }) {
       {data.about ? (
         <>
           <p>About:</p>
-          <div dangerouslySetInnerHTML={{ __html: data.about }}></div>
+          <div
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.about) }}
+          ></div>
         </>
       ) : null}
     </div>
