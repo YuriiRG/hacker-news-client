@@ -10,14 +10,11 @@ import {
   storySchema
 } from '../schemas';
 import PostSummarySkeleton from './PostSummarySkeleton';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
 import { Link } from 'wouter';
 import getItemSchema from '../helpers/getItemSchema';
 import FeedLink from './FeedLink';
-dayjs.extend(relativeTime);
-dayjs.extend(localizedFormat);
+import dayjs from '../lib/dayjs';
+
 export default function PostSummary({ id }: { id: number }) {
   const {
     data: post,

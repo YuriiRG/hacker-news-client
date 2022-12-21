@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const Feed = lazy(() => import('./components/Feed'));
 const NotFound = lazy(() => import('./routes/NotFound'));
+const User = lazy(() => import('./routes/User'));
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,9 @@ export default function App() {
             </Route>
             <Route path='/new'>
               <Feed type='new' />
+            </Route>
+            <Route path='/user/:id'>
+              {(params) => <User id={params.id} />}
             </Route>
             <Route>
               <NotFound />
