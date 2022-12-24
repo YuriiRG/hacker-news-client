@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const commentSchema = z.object({
   id: z.number(),
   by: z.string(),
-  kids: z.array(z.number()),
+  kids: z.array(z.number()).optional(),
   parent: z.number(),
   text: z.string(),
   time: z.number(),

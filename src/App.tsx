@@ -7,7 +7,7 @@ import NotFound from './routes/NotFound';
 import User from './routes/User';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import Item from './routes/Item';
+import ItemView from './routes/ItemView';
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -30,7 +30,7 @@ export default function App() {
               {(params) => <User id={params.id} />}
             </Route>
             <Route path='/item/:id'>
-              {(params) => <Item id={Number(params.id)} />}
+              {(params) => <ItemView id={Number(params.id)} />}
             </Route>
             <Route>
               <NotFound />
