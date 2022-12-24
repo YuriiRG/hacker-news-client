@@ -11,6 +11,7 @@ export default function CommentView({
   id: number;
   level: number;
 }) {
+  const [kidsLimit, setKidsLimit] = useState(10);
   const { data, isLoading, isError } = useQuery({
     queryKey: ['item', id],
     queryFn: () =>
@@ -20,11 +21,31 @@ export default function CommentView({
       )
   });
   const [showDeeper, setShowDeeper] = useState(false);
+  const children = (
+    <>
+      {data?.kids?.slice(0, kidsLimit).map((commentId) => (
+        <CommentView key={commentId} id={commentId} level={level + 1} />
+      ))}
+      {kidsLimit < (data?.kids?.length ?? 0) ? (
+        <button
+          className='p-2 hover:underline'
+          onClick={() => setKidsLimit((mc) => mc + 10)}
+        >
+          Show more comments
+        </button>
+      ) : (
+        <></>
+      )}
+    </>
+  );
   if (isError) {
     return <>Error.</>;
   }
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+  if (!data.text) {
+    return <></>;
   }
   return (
     <div>
@@ -36,13 +57,9 @@ export default function CommentView({
       <div className='ml-10'>
         {data.kids ? (
           level % 2 !== 0 ? (
-            data.kids.map((commentId) => (
-              <CommentView key={commentId} id={commentId} level={level + 1} />
-            ))
+            children
           ) : showDeeper ? (
-            data.kids.map((commentId) => (
-              <CommentView key={commentId} id={commentId} level={level + 1} />
-            ))
+            children
           ) : (
             <button
               onClick={() => setShowDeeper(true)}

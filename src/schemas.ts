@@ -2,10 +2,10 @@ import { z } from 'zod';
 
 export const commentSchema = z.object({
   id: z.number(),
-  by: z.string(),
+  by: z.string().optional(),
   kids: z.array(z.number()).optional(),
   parent: z.number(),
-  text: z.string(),
+  text: z.string().optional(),
   time: z.number(),
   type: z.literal('comment')
 });
