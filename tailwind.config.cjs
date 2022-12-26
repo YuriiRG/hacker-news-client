@@ -5,7 +5,10 @@ module.exports = {
     extend: {
       spacing: {
         '128': '32rem',
-        'prose': '65ch'
+        'prose': '75ch'
+      },
+      maxWidth: {
+        'prose': '75ch'
       }
     }
   },

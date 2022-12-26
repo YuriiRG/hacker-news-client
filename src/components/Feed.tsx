@@ -41,8 +41,8 @@ export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
     postResponses.length === 0
   ) {
     return (
-      <div className='m-2 flex flex-col items-center'>
-        <div className='flex flex-col gap-2 max-w-prose break-words'>
+      <div className='m-2 flex justify-center'>
+        <div className='flex flex-col w-prose gap-6'>
           {[...Array(postCount)].map((_, i) => (
             <PostSummarySkeleton key={i} />
           ))}
@@ -54,7 +54,7 @@ export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
   const posts = postResponses.map((res) => res.data as Item);
   return (
     <div className='m-2 flex justify-center'>
-      <div className='flex flex-col gap-2 w-prose break-words'>
+      <div className='flex flex-col gap-6 w-prose break-words'>
         {posts.map((post) => (
           <PostSummary key={post.id} id={post.id} />
         ))}
