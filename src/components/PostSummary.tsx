@@ -38,9 +38,7 @@ export default function PostSummary({ id }: { id: number }) {
       ) : (
         <></>
       )}
-      <div className='text-sm text-gray-400'>
-        <PostDetails item={item} />
-      </div>
+      <PostDetails item={item} />
     </div>
   );
 }
