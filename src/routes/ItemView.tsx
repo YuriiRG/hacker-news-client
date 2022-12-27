@@ -32,9 +32,9 @@ export default function ItemView({ id }: { id: number }) {
       {item.title ? (
         <h1 className='text-3xl'>
           {item.url ? (
-            <Link href={item.url} className='hover:underline'>
+            <a href={item.url} className='hover:underline'>
               {item.title}
-            </Link>
+            </a>
           ) : (
             item.title
           )}
