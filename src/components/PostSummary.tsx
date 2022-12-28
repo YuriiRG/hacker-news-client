@@ -33,7 +33,7 @@ export default function PostSummary({ id }: { id: number }) {
   }
   return (
     <div>
-      {item.title ? (
+      {item.title && (
         <>
           <FeedLink
             href={item.url ?? `/item/${item.id}`}
@@ -41,19 +41,15 @@ export default function PostSummary({ id }: { id: number }) {
           >
             {item.title}
           </FeedLink>{' '}
-          {item.url ? (
+          {item.url && (
             <Link
               href={`/item/${item.id}`}
               className='hover:underline visited:text-gray-400'
             >
               [comments]
             </Link>
-          ) : (
-            <></>
           )}
         </>
-      ) : (
-        <></>
       )}
       <div></div>
       <PostDetails item={item} />
