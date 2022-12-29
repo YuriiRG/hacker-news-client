@@ -35,23 +35,5 @@ export default function NavBar() {
         {items}
       </div>
     </nav>
-    // <nav className='flex flex-col gap-4 p-1 sm:flex-row sm:items-center'>
-    //   <div className='flex justify-between'>
-    //     <div className='p-3'>Hacker News</div>
-    //     <Hamburger
-    //       className='block h-5 w-5 sm:hidden'
-    //       onClick={() => setIsFolded((f) => !f)}
-    //     />
-    //   </div>
-    //   <div
-    //     className={
-    //       'flex flex-col gap-4 sm:flex-row sm:items-center' +
-    //       ' ' +
-    //       (isFolded ? 'hidden sm:block' : '')
-    //     }
-    //   >
-    //     {items}
-    //   </div>
-    // </nav>
   );
 }

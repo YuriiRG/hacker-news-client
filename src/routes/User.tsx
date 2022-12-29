@@ -33,14 +33,14 @@ export default function User({ id }: { id: string }) {
         {Intl.NumberFormat('en', { notation: 'compact' }).format(data.karma)}
       </p>
       <p>Created: {dayjs(data.created * 1000).format('LLL')}</p>
-      {data.about ? (
+      {data.about && (
         <>
           <p>About:</p>
           <div
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.about) }}
           ></div>
         </>
-      ) : null}
+      )}
     </div>
   );
 }

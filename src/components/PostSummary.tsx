@@ -33,14 +33,26 @@ export default function PostSummary({ id }: { id: number }) {
   }
   return (
     <div>
-      {item.title ? (
-        <FeedLink href={item.url ?? `/item/${item.id}`}>{item.title}</FeedLink>
-      ) : (
-        <></>
+      {item.title && (
+        <>
+          <FeedLink
+            href={item.url ?? `/item/${item.id}`}
+            domain={item.url ? ` (${new URL(item.url).hostname})` : <></>}
+          >
+            {item.title}
+          </FeedLink>{' '}
+          {item.url && (
+            <Link
+              href={`/item/${item.id}`}
+              className='hover:underline visited:text-gray-400'
+            >
+              [comments]
+            </Link>
+          )}
+        </>
       )}
-      <div className='text-sm text-gray-400'>
-        <PostDetails item={item} />
-      </div>
+      <div></div>
+      <PostDetails item={item} />
     </div>
   );
 }
