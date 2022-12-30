@@ -19,7 +19,6 @@ export default function PostSummary({ id }: { id: number }) {
         `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
         itemSchema
       ),
-    keepPreviousData: true,
     staleTime: 1500
   });
   if (isError) {
