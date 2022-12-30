@@ -35,8 +35,11 @@ export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
   if (postResponses.some((post) => post.isError) || isError) {
     return <div className='p-3'>Error.</div>;
   }
-
-  if (postResponses.length === 0) {
+  if (
+    postResponses.length === 0 ||
+    (postResponses.length === 30 &&
+      postResponses.some((p) => p.data === undefined))
+  ) {
     return (
       <div className='mx-2 my-4 flex justify-center'>
         <div className='flex flex-col w-prose gap-6'>
