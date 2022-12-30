@@ -38,7 +38,7 @@ export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
 
   if (postResponses.length === 0) {
     return (
-      <div className='m-2 flex justify-center'>
+      <div className='mx-2 my-4 flex justify-center'>
         <div className='flex flex-col w-prose gap-6'>
           {[...Array(postCount)].map((_, i) => (
             <PostSummarySkeleton key={i} />
@@ -50,12 +50,17 @@ export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
 
   const posts = postResponses.map((res) => res.data as Item | undefined);
   return (
-    <div className='m-2 flex justify-center'>
+    <div className='mx-2 my-4 flex justify-center'>
       <div className='flex flex-col gap-6 w-prose break-words'>
         {posts.map(
           (post) => post && <PostSummary key={post.id} id={post.id} />
         )}
-        <button onClick={() => setPostCount((pc) => pc + 30)}>Load more</button>
+        <button
+          className='py-2 px-4 bg-gray-700 self-center rounded-lg font-semibold'
+          onClick={() => setPostCount((pc) => pc + 30)}
+        >
+          Load more
+        </button>
       </div>
     </div>
   );
