@@ -42,7 +42,7 @@ export default function CommentView({
     return <>Error.</>;
   }
   if (isLoading) {
-    return <></>;
+    return <div className='h-10'></div>;
   }
   if (!data.text) {
     return <></>;
@@ -51,7 +51,7 @@ export default function CommentView({
     <div>
       <div
         className='
-          mt-10 bg-gray-700 p-2 rounded max-w-prose
+          mt-10 bg-gray-700 p-2 rounded max-w-prose break-words
           hover:[&_a]:underline [&_pre]:break-words [&_pre]:whitespace-pre-wrap
         '
       >
@@ -69,7 +69,7 @@ export default function CommentView({
         ></div>
       </div>
 
-      <div className='ml-10'>
+      <div className='ml-[5%] sm:ml-[3%]'>
         {data.kids &&
           (level % 2 !== 0 ? (
             children
