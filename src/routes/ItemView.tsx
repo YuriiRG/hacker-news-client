@@ -25,7 +25,7 @@ export default function ItemView({ id }: { id: number }) {
     return <>Error.</>;
   }
   if (isLoading) {
-    return <>Loading...</>;
+    return <></>;
   }
   return (
     <div className='px-4 pb-4'>

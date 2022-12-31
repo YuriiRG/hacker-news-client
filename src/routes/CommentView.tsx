@@ -42,7 +42,7 @@ export default function CommentView({
     return <>Error.</>;
   }
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <></>;
   }
   if (!data.text) {
     return <></>;

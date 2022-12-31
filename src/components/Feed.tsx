@@ -26,8 +26,7 @@ export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
               fetcher(
                 `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
                 itemSchema
-              ),
-            staleTime: 1500
+              )
           }))
         : []
   });
