@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-#root {
+#root,
+body {
   @apply text-gray-300 bg-gray-800;
 }
