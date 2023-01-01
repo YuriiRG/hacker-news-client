@@ -35,14 +35,20 @@ export default function CommentView({
 
   let data: Comment | undefined;
 
+  if (isError) {
+    return <>Error.</>;
+  }
+
   if (!commentSchema.safeParse(item).success) {
     if (isLoading) {
       // Loading
-      return (
+      return showParent ? (
         <>
           Loading...
           {children}
         </>
+      ) : (
+        <div className='h-10'></div>
       );
     } else {
       // Recursion edge case
@@ -57,6 +63,14 @@ export default function CommentView({
   } else {
     data = commentSchema.parse(item);
   }
+
+  if (isError) {
+    return <>Error.</>;
+  }
+  if (!data?.text) {
+    return <></>;
+  }
+
   if (children === undefined) {
     children = (
       <>
@@ -73,15 +87,6 @@ export default function CommentView({
         )}
       </>
     );
-  }
-  if (isError) {
-    return <>Error.</>;
-  }
-  if (isLoading) {
-    return <div className='h-10'></div>;
-  }
-  if (!data.text) {
-    return <></>;
   }
   const mainMarkup = (
     <>

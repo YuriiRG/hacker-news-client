@@ -41,7 +41,9 @@ export default function App() {
             </Route>
             <Route path='/comment/:id'>
               {(params) => (
-                <CommentView id={Number(params.id)} showParent highlight />
+                <div className='m-2'>
+                  <CommentView id={Number(params.id)} showParent highlight />
+                </div>
               )}
             </Route>
             <Route>
