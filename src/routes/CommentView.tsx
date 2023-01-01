@@ -7,13 +7,13 @@ import { commentSchema, itemSchema, Comment } from '../schemas';
 import { Link } from 'wouter';
 export default function CommentView({
   id,
-  level,
+  level = 1,
   children,
   showParent = false,
   highlight = false
 }: {
   id: number;
-  level: number;
+  level?: number;
   children?: ReactNode;
   showParent?: boolean;
   highlight?: boolean;
@@ -126,7 +126,7 @@ export default function CommentView({
     </>
   );
   return showParent ? (
-    <CommentView id={data.parent} level={1} showParent={true}>
+    <CommentView id={data.parent} showParent>
       {mainMarkup}
     </CommentView>
   ) : (
