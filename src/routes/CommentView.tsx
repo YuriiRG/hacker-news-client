@@ -54,7 +54,14 @@ export default function CommentView({
       // Recursion edge case
       return (
         <>
-          Open main post {item?.id}
+          <div className='rounded-lg bg-teal-900'>
+            <Link
+              href={`/item/${item.id}`}
+              className='block p-4 underline hover:text-gray-200'
+            >
+              Open main post
+            </Link>
+          </div>
           <ScrollToHighlight />
           {children}
         </>
@@ -98,15 +105,22 @@ export default function CommentView({
         }
         id={highlight ? 'highlight' : undefined}
       >
-        <div className='text-sm text-gray-400'>
-          by{' '}
-          <Link href={`/user/${data.by}`} className='hover:underline'>
-            {data.by}
-          </Link>{' '}
-          <span title={dayjs(data.time * 1000).format('LLLL')}>
-            {dayjs(data.time * 1000).fromNow()}
-          </span>{' '}
-          {data.id}
+        <div className='flex gap-3 flex-wrap text-sm text-gray-400'>
+          <div>
+            by{' '}
+            <Link href={`/user/${data.by}`} className='hover:underline'>
+              {data.by}
+            </Link>{' '}
+            <span title={dayjs(data.time * 1000).format('LLLL')}>
+              {dayjs(data.time * 1000).fromNow()}
+            </span>
+          </div>
+          <Link
+            href={`/comment/${data.id}`}
+            className='hover:underline hover:text-gray-200'
+          >
+            direct link
+          </Link>
         </div>
         <div
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.text) }}
