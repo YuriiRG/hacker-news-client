@@ -70,11 +70,10 @@ export default function CommentView({
   } else {
     data = commentSchema.parse(item);
   }
-
   if (isError) {
     return <>Error.</>;
   }
-  if (!data?.text) {
+  if (!data?.text || data.deleted || data.dead) {
     return <></>;
   }
 
@@ -115,11 +114,8 @@ export default function CommentView({
               {dayjs(data.time * 1000).fromNow()}
             </span>
           </div>
-          <Link
-            href={`/comment/${data.id}`}
-            className='hover:underline hover:text-gray-200'
-          >
-            direct link
+          <Link href={`/comment/${data.id}`} className='hover:underline'>
+            link
           </Link>
         </div>
         <div
