@@ -59,7 +59,7 @@ export default function CommentView({
               href={`/item/${item.id}`}
               className='block p-4 underline hover:text-gray-200'
             >
-              Open main post
+              Open main post {item.title && <>: &quot;{item.title}&quot;</>}
             </Link>
           </div>
           <ScrollToHighlight />
