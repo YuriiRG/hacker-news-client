@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import DOMPurify from 'dompurify';
 import { useState } from 'react';
 import { Link } from 'wouter';
+import Post from '../components/Post';
 import PostDetails from '../components/PostDetails';
 import fetcher from '../helpers/fetcher';
 import { itemSchema } from '../schemas';
@@ -29,26 +30,7 @@ export default function ItemView({ id }: { id: number }) {
   }
   return (
     <div className='px-4 pb-4'>
-      {item.title && (
-        <h1 className='text-3xl'>
-          {item.url ? (
-            <a href={item.url} className='hover:underline'>
-              {item.title}
-            </a>
-          ) : (
-            item.title
-          )}
-        </h1>
-      )}
-      <div className='text-gray-400'>
-        <PostDetails item={item} />
-      </div>
-      {item.text && (
-        <p
-          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.text) }}
-          className='hover:[&_a]:underline [&_a]:text-blue-200'
-        ></p>
-      )}
+      <Post item={item} />
       <div>
         {item.kids && (
           <>

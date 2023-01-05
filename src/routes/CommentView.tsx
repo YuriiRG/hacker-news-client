@@ -5,6 +5,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import fetcher from '../helpers/fetcher';
 import { commentSchema, itemSchema, Comment } from '../schemas';
 import { Link } from 'wouter';
+import Post from '../components/Post';
 export default function CommentView({
   id,
   level = 1,
@@ -54,12 +55,13 @@ export default function CommentView({
       // Recursion edge case
       return (
         <>
-          <div className='rounded-lg bg-teal-900'>
+          <Post item={item} />
+          <div className='rounded-lg bg-teal-800 mt-5 w-fit'>
             <Link
               href={`/item/${item.id}`}
               className='block p-4 underline hover:text-gray-200'
             >
-              Open main post {item.title && <>: &quot;{item.title}&quot;</>}
+              Open main post
             </Link>
           </div>
           <ScrollToHighlight />
