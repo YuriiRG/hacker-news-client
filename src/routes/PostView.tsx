@@ -1,14 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import DOMPurify from 'dompurify';
 import { useState } from 'react';
-import { Link } from 'wouter';
 import Post from '../components/Post';
-import PostDetails from '../components/PostDetails';
 import fetcher from '../helpers/fetcher';
 import { itemSchema } from '../schemas';
 import CommentView from './CommentView';
 
-export default function ItemView({ id }: { id: number }) {
+export default function PostView({ id }: { id: number }) {
   const {
     data: item,
     isError,
