@@ -61,7 +61,7 @@ export default function CommentView({
               href={`/item/${item.id}`}
               className='block p-4 underline hover:text-gray-200'
             >
-              Open main post
+              Show all comments
             </Link>
           </div>
           <ScrollToHighlight />
