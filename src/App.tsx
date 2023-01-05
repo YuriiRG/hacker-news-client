@@ -7,7 +7,8 @@ import NotFound from './routes/NotFound';
 import User from './routes/User';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import ItemView from './routes/ItemView';
+import PostView from './routes/PostView';
+import CommentView from './routes/CommentView';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -36,7 +37,14 @@ export default function App() {
               {(params) => <User id={params.id} />}
             </Route>
             <Route path='/item/:id'>
-              {(params) => <ItemView id={Number(params.id)} />}
+              {(params) => <PostView id={Number(params.id)} />}
+            </Route>
+            <Route path='/comment/:id'>
+              {(params) => (
+                <div className='m-2'>
+                  <CommentView id={Number(params.id)} showParent highlight />
+                </div>
+              )}
             </Route>
             <Route>
               <NotFound />

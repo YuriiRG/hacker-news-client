@@ -7,6 +7,8 @@ export const commentSchema = z.object({
   parent: z.number(),
   text: z.string().optional(),
   time: z.number(),
+  deleted: z.boolean().optional(),
+  dead: z.boolean().optional(),
   type: z.literal('comment')
 });
 export type Comment = z.infer<typeof commentSchema>;
@@ -24,7 +26,7 @@ export const itemSchema = z.object({
   id: z.number(),
   deleted: z.boolean().optional(),
   type: z.enum(['story', 'job', 'comment', 'poll', 'pollopt']),
-  by: z.string(),
+  by: z.string().optional(),
   time: z.number(),
   text: z.string().optional(),
   dead: z.boolean().optional(),
