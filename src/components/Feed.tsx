@@ -5,8 +5,11 @@ import PostSummary from '../components/PostSummary';
 import PostSummarySkeleton from '../components/PostSummarySkeleton';
 import { Item, itemSchema } from '../schemas';
 import { useState } from 'react';
+import useTitle from '../helpers/useTitle';
 export default function Feed({ type }: { type: 'new' | 'best' | 'top' }) {
   const [postCount, setPostCount] = useState(30);
+
+  useTitle(`${type.charAt(0).toUpperCase() + type.slice(1)} posts | YAHNC`);
 
   const { data: ids, isError } = useQuery({
     queryKey: [`${type}stories`],

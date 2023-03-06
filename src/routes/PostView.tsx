@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import Post from '../components/Post';
 import fetcher from '../helpers/fetcher';
+import useTitle from '../helpers/useTitle';
 import { itemSchema } from '../schemas';
 import CommentView from './CommentView';
 
@@ -18,6 +19,7 @@ export default function PostView({ id }: { id: number }) {
         itemSchema
       )
   });
+  useTitle(`${item?.title} | YANHC`);
   const [maxComments, setMaxComments] = useState(10);
   if (isError) {
     return <>Error.</>;
